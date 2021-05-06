@@ -14,7 +14,7 @@ Please run
 
 Check that the datase is setup and responding:
 
-    sudo docker-compose run database python manage.py checkdb
+    sudo docker-compose run database python manage.py check
 
 Make the initial migration by running::
 
