@@ -1,0 +1,70 @@
+version: '3.3'
+
+services:
+  database:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 5002:8000
+    volumes:
+      - ./irekua-database:/app
+    env_file:
+      - dev.env
+    depends_on:
+      - db
+    environment:
+      - IREKUA_DATABASE_HOST=db
+      - IREKUA_DATABASE_PORT=5432
+
+  rest-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - dev.env
+    depends_on:
+      - db
+    ports:
+      - 5001:8000
+    volumes:
+      - ./irekua-rest-api:/app
+      - ./irekua-database:/irekua-database
+    environment:
+      - IREKUA_DATABASE_HOST=db
+      - IREKUA_DATABASE_PORT=5432
+
+  selia:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - dev.env
+    ports:
+      - 5000:8000
+    depends_on:
+      - db
+    volumes:
+      - ./selia:/app
+      - ./irekua-database:/irekua-database
+      - ./irekua-rest-api:/irekua-rest-api
+    environment:
+      - IREKUA_DATABASE_HOST=db
+      - IREKUA_DATABASE_PORT=5432
+
+  db:
+    image: postgis/postgis
+    volumes:
+      - postgis-data:/var/lib/postgresql
+    env_file:
+      - dev.env
+    restart: on-failure
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+    postgis-data:
+

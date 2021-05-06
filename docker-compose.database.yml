@@ -1,0 +1,36 @@
+version: '3.3'
+
+services:
+  database:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 5002:8000
+    volumes:
+      - ./irekua-database:/app
+    env_file:
+      - dev.env
+    depends_on:
+      - db
+    environment:
+      - IREKUA_DATABASE_HOST=db
+      - IREKUA_DATABASE_PORT=5432
+    command: ["python", "manage.py", "runserver"]
+
+  db:
+    image: postgis/postgis
+    volumes:
+      - postgis-data:/var/lib/postgresql
+    env_file:
+      - dev.env
+    restart: on-failure
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+    postgis-data:
+
