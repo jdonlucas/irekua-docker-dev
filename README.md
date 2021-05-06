@@ -12,13 +12,17 @@ Please run
   
 ## Initialize the database
 
+Check that the datase is setup and responding:
+
+    sudo docker-compose run database python manage.py checkdb
+
 Make the initial migration by running::
 
-    sudo docker-compose -f docker-compose.database.yml run database python manage.py migrate
+    sudo docker-compose run database python manage.py migrate
   
-Make a super user
+Create a superuser
 
-    sudo docker-compose -f docker-compose.database.yml run database python manage.py createsuperuser
+    sudo docker-compose run database python manage.py createsuperuser
   
   
 ## Start the development servers
