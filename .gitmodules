@@ -1,0 +1,9 @@
+[submodule "selia"]
+	path = selia
+	url = git@github.com:CONABIO-audio/selia.git
+[submodule "irekua-database"]
+	path = irekua-database
+	url = git@github.com:CONABIO-audio/irekua-database.git
+[submodule "irekua-rest-api"]
+	path = irekua-rest-api
+	url = git@github.com:CONABIO-audio/irekua-rest-api.git
