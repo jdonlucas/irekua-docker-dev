@@ -1,0 +1,4 @@
+# ignore irekua/selia repos
+irekua-database/
+selia/
+irekua-rest-api/

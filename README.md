@@ -3,6 +3,12 @@ Dockerfile and docker compose for irekua development
 
 # Start developing
 
+## Clone the repositories
+
+First clone the repositories using get-repos.sh. Please run
+
+    bash get-repos.sh
+    
 ## Build the image
 
 Please run
