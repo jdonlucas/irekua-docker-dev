@@ -9,6 +9,7 @@ services:
       - 5002:8000
     volumes:
       - ./irekua-database:/app
+      - ./media:/media
     env_file:
       - dev.env
     depends_on:
@@ -30,6 +31,7 @@ services:
     volumes:
       - ./irekua-rest-api:/app
       - ./irekua-database:/irekua-database
+      - ./media:/media
     environment:
       - IREKUA_DATABASE_HOST=db
       - IREKUA_DATABASE_PORT=5432
@@ -48,6 +50,7 @@ services:
       - ./selia:/app
       - ./irekua-database:/irekua-database
       - ./irekua-rest-api:/irekua-rest-api
+      - ./media:/media
     environment:
       - IREKUA_DATABASE_HOST=db
       - IREKUA_DATABASE_PORT=5432
